@@ -6,8 +6,9 @@ node{
         sh 'mvn package'
     }
     stage('Sonarqube Analysis'){
-        sh 'mvn sonar:sonar'
-    }
+        withSonarQubeEnv('sonarqube'){
+            sh 'mvn sonar:sonar'
+        }
     stage('Email Notification'){
         mail bcc: '', body: '''Hi, Welcome to Jenkins Email Alerts.
 
