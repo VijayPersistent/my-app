@@ -9,6 +9,7 @@ node{
         withSonarQubeEnv('sonarqube'){
             sh 'mvn sonar:sonar'
         }
+     }   
     stage('Email Notification'){
         mail bcc: '', body: '''Hi, Welcome to Jenkins Email Alerts.
 
