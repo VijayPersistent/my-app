@@ -5,6 +5,11 @@ node{
     stage('Compile-Package'){
         sh 'mvn package'
     }
+    stage('Deploy to Tomcat'){
+    sshagent(['tomcat-cred']) {
+    sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@172.31.89.79:/tmp/apache-tomcat-8.5.37/webapps/'
+        }
+    }
     stage('Sonarqube Analysis'){
         withSonarQubeEnv('sonarqube'){
             sh 'mvn sonar:sonar'
